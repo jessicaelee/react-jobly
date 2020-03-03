@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
-import bootstrap from 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-function Nav() {
-    const [loggedIn, setLoggedIn] = useState(true);
+function Nav({ loggedIn, logout }) {
 
-    function handleLogout() {
-        localStorage.removeItem("_token")
-        console.log(localStorage)
-    }
 
     const loggedInLinks = (
         <ul className="navbar-nav ml-auto">
             <li className="nav-item mr-4"><NavLink exact to="/companies">Companies</NavLink></li>
             <li className="nav-item mr-4"><NavLink exact to="/jobs">Jobs</NavLink></li>
             <li className="nav-item mr-4"><NavLink exact to="/profile">Profile</NavLink></li>
-            <li className="nav-item mr-4"><NavLink exact to="/" onClick={handleLogout}>Logout</NavLink></li>
+            <li className="nav-item mr-4"><NavLink exact to="/" onClick={logout}>Logout</NavLink></li>
         </ul>
     )
 

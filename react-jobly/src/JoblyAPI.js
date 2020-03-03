@@ -32,6 +32,11 @@ class JoblyApi {
         let res = await this.request(`companies/${handle}`);
         return res.company;
     }
+
+    static async createUser(user) {
+        let res = await this.request('users/post', {data: user}, "post");
+        return res.token;
+    }
 }
 
 export default JoblyApi;
