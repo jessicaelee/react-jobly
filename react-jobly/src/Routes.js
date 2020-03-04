@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, BrowserRouter, useHistory } from 'react-router-dom'
 
 import Company from './Company';
 import Companies from './Companies';
@@ -11,17 +11,19 @@ import Nav from './Nav'
 import JoblyApi from './JoblyAPI'
 
 function Routes() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  //don't need to check if token is valid, just if there is one 
+  //don't need to check if token is valid, just if there is one
   //backend validates token
   useEffect(() => {
     console.log("checking token")
     checkToken();
   }, [])
 
-  function login(token) {
+  async function login(user) {
+    let token = await JoblyApi.loginUser(user)
     localStorage.setItem("_token", token);
+    setLoggedIn(true);
   }
 
   function logout() {
@@ -30,9 +32,9 @@ function Routes() {
   }
 
   async function create(user) {
-    let { token } = await JoblyApi.createUser(user);
+    let token = await JoblyApi.createUser(user);
     localStorage.setItem("_token", token);
-    setLoggedIn()
+    setLoggedIn(true);
   }
 
   function checkToken() {
@@ -44,7 +46,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Nav loggedIn={loggedIn} logout={logout} />
-      <Switch>
+      <Switch >
         <Route exact path="/companies/:handle">
           {loggedIn ? <Company /> : <Redirect to="/" />}
         </Route>

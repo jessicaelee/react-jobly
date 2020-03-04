@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login({ login, create }) {
   const [returning, setReturning] = useState(true);
   const [form, setForm] = useState({
     username: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: ""
-  })
+  });
+  let history = useHistory();
 
   function toggleForm(state) {
     setReturning(state);
@@ -21,14 +23,16 @@ function Login({ login, create }) {
     }));
   }
 
-  function handleLogin(evt) {
+  async function handleLogin(evt) {
     evt.preventDefault();
-    login();
+    await login(form);
+    history.push("/jobs");
   }
 
-  function handleCreate(evt) {
+  async function handleCreate(evt) {
     evt.preventDefault();
-    create(form);
+    await create(form);
+    history.push("/jobs")
   }
 
   const { username, password, firstName, lastName, email } = form;
@@ -74,16 +78,16 @@ function Login({ login, create }) {
 
       <label htmlFor="firstName">First Name</label>
       <input id="firstName"
-        name="firstName"
-        type="firstName"
+        name="first_name"
+        type="text"
         required
         onChange={handleChange}
         value={firstName} />
 
       <label htmlFor="lastName">Last Name</label>
       <input id="lastName"
-        name="lastName"
-        type="lastName"
+        name="last_name"
+        type="text"
         required
         onChange={handleChange}
         value={lastName} />

@@ -37,11 +37,13 @@ class JoblyApi {
         return res.companies
     }
 
-    //i updated the json schema to match our form 
-    //this kept 404'ing because the schema test was failing
-    //also fixed user and took it out of {} since already object
     static async createUser(user) {
         let res = await this.request('users', user, "post");
+        return res.token;
+    }
+
+    static async loginUser(user) {
+        let res = await this.request('login', user, "post");
         return res.token;
     }
 
