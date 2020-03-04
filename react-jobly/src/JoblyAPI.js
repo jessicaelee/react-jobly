@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios"
 
 class JoblyApi {
@@ -47,6 +46,17 @@ class JoblyApi {
   static async loginUser(user) {
     let res = await this.request('login', user, "post");
     return res.token;
+  }
+
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  static async updateUser(user) {
+    const { username, ...userInput } = user
+    let res = await this.request(`users/${user.username}`, userInput, "patch");
+    return res.user;
   }
 
 

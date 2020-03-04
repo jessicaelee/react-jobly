@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 
 function Home({ loggedIn }) {
@@ -8,8 +8,8 @@ function Home({ loggedIn }) {
       <h1>Jobly</h1>
       <p>All the jobs, in one convenient place.</p>
       {loggedIn
-      ? <h2>Welcome Back!</h2>
-      : <Link className="btn btn-primary" to="/login">Login</Link> }
+        ? <h2>Welcome Back!</h2>
+        : <Link className="btn btn-primary" to="/login">Login</Link>}
     </div>
   )
 }
