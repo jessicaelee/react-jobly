@@ -33,10 +33,17 @@ class JoblyApi {
         return res.company;
     }
 
+    static async getCompanies(search) {
+        let res = await this.request(`companies`, { search });
+        return res.companies
+    }
+
     static async createUser(user) {
-        let res = await this.request('users/post', {data: user}, "post");
+        let res = await this.request('users/post', { data: user }, "post");
         return res.token;
     }
+
+
 }
 
 export default JoblyApi;
