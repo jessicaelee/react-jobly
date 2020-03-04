@@ -7,7 +7,6 @@ class JoblyApi {
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
             "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30." +
             "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U");
-
         console.debug("API Call:", endpoint, paramsOrData, verb);
 
         try {
@@ -38,8 +37,11 @@ class JoblyApi {
         return res.companies
     }
 
+    //i updated the json schema to match our form 
+    //this kept 404'ing because the schema test was failing
+    //also fixed user and took it out of {} since already object
     static async createUser(user) {
-        let res = await this.request('users/post', { data: user }, "post");
+        let res = await this.request('users', user, "post");
         return res.token;
     }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
 
 import Company from './Company';
@@ -10,30 +10,36 @@ import Home from './Home';
 import Nav from './Nav'
 import JoblyApi from './JoblyAPI'
 
-
 function Routes() {
   const [loggedIn, setLoggedIn] = useState(true);
 
-  function login(user) {
+  //don't need to check if token is valid, just if there is one 
+  //backend validates token
+  useEffect(() => {
+    console.log("checking token")
+    checkToken();
+  }, [])
 
+  function login(token) {
+    localStorage.setItem("_token", token);
   }
 
   function logout() {
     localStorage.removeItem("_token");
     setLoggedIn(false);
-
   }
 
-  function create(user) {
-    let { token } = JoblyApi.createUser(user);
+  async function create(user) {
+    let { token } = await JoblyApi.createUser(user);
     localStorage.setItem("_token", token);
     setLoggedIn()
   }
 
   function checkToken() {
     let token = localStorage.getItem("_token");
-    setLoggedIn(token? true : false);
+    setLoggedIn(token ? true : false);
   }
+
 
   return (
     <BrowserRouter>
@@ -48,11 +54,11 @@ function Routes() {
         <Route exact path="/jobs">
           {loggedIn ? <Jobs /> : <Redirect to="/" />}
         </Route>
-        <Route exact path="/login">
-          {!loggedIn ? <Login login={login} create={create} /> : <Redirect to="/" />}
-        </Route>
         <Route exact path="/profile">
           {loggedIn ? <ProfileEditForm /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/login">
+          {!loggedIn ? <Login login={login} create={create} /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/">
           <Home loggedIn={loggedIn} />

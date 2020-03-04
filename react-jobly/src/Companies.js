@@ -3,6 +3,7 @@ import JoblyAPi from './JoblyAPI';
 import Axios from 'axios';
 import CompanyCard from './CompanyCard'
 
+
 function Companies() {
   const [companies, setCompanies] = useState([]);
   const [form, setForm] = useState({ search: "" });

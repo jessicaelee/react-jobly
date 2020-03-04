@@ -28,7 +28,7 @@ function Login({ login, create }) {
 
   function handleCreate(evt) {
     evt.preventDefault();
-    create();
+    create(form);
   }
 
   const { username, password, firstName, lastName, email } = form;
