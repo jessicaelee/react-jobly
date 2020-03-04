@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 
 function CompanyCard(company) {
@@ -9,7 +9,7 @@ function CompanyCard(company) {
         <Link exact to={`companies/${handle}`} className="card">
             <div className="CompanyCard-Body card-body">
                 <h6 className="card-title d-flex justify-content-between">
-                    <span > {name}
+                    <span className="text-capitalize"> {name}
                     </span>
                     <img src={logo_url} alt={handle} />
                 </h6>

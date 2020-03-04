@@ -37,6 +37,11 @@ class JoblyApi {
         return res.companies
     }
 
+    static async getJobs(search) {
+        let res = await this.request('jobs', { search });
+        return res.jobs
+    }
+
     static async createUser(user) {
         let res = await this.request('users', user, "post");
         return res.token;
