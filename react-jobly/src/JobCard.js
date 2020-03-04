@@ -1,7 +1,7 @@
 import React from 'react';
 
 function JobCard(job) {
-  const { title, salary, equity } = job.job
+  const { title, salary, equity } = job.job;
 
   return (
 
@@ -17,7 +17,7 @@ function JobCard(job) {
       </div>
     </div>
 
-  )
+  );
 }
 
 export default JobCard;

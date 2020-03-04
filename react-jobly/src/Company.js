@@ -17,8 +17,8 @@ function Company() {
   }, [handle])
 
   const jobs = company
-    ? company.jobs.map(job => <JobCard job={job} id={job.id} />)
-    : "No jobs match your search";
+    ? company.jobs.map(job => <JobCard job={job} key={job.id} />)
+    : "No jobs posted";
 
   return (
     <div className="Company">

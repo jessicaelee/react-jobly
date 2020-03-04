@@ -16,7 +16,6 @@ function Routes() {
   //don't need to check if token is valid, just if there is one
   //backend validates token
   useEffect(() => {
-    console.log("checking token")
     checkToken();
   }, [])
 
