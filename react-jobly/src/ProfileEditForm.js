@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Alert from './Alert'
 
 function ProfileEditForm({ user, updateUser }) {
-  const { username, first_name, last_name, email, photo_url } = user
-  const [updatedSuccessfully, setUpdatedSuccessfully] = useState(false)
+  const { username, first_name, last_name, email, photo_url } = user;
+  const [alert, setAlert] = useState(null)
   const [form, setForm] = useState({
     username,
     first_name,
@@ -12,7 +12,6 @@ function ProfileEditForm({ user, updateUser }) {
     photo_url: photo_url || "",
     password: ""
   });
-
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -25,16 +24,14 @@ function ProfileEditForm({ user, updateUser }) {
     evt.preventDefault();
     try {
       await updateUser(form);
+      setAlert(<Alert type="success" messages={["User successfully updated."]} />);
       setForm(form => ({ ...form, password: "" }));
-      setUpdatedSuccessfully(true);
+      setTimeout(() => setAlert(null), 4000);
     } catch (err) {
-
-    }
+      setAlert(<Alert messages={err} />);
+      setTimeout(() => setAlert(null), 4000);
+    };
   };
-
-  useEffect(() => {
-
-  }, [updatedSuccessfully])
 
   const updateForm = (
     <form className="Update-updateForm" onSubmit={handleSubmit}>
@@ -85,13 +82,16 @@ function ProfileEditForm({ user, updateUser }) {
     </form>
   )
 
+
   return (
     <div className="ProfileEditFrom pt-5">
       <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
         <h3>Profile</h3>
         <div className="card"><div className="card-body">
+          {(alert) ? alert : ""}
           {updateForm}
-        </div></div>
+        </div>
+        </div>
       </div>
     </div>
   )
