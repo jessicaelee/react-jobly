@@ -1,7 +1,5 @@
 import React, { useState, useContext } from 'react';
-import Alert from './Alert'
 import UserContext from './userContext'
-import JoblyAPI from './JoblyAPI'
 import './ProfileEditForm.css'
 import JobCard from './JobCard'
 
@@ -10,6 +8,7 @@ function MyApps() {
     const { jobs } = user;
 
     let jobCards = jobs.map(job => <JobCard job={job} key={job.id} />)
+
 
     return (
         <div className="Jobs pt-5">

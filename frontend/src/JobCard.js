@@ -3,18 +3,19 @@ import { Link } from 'react-router-dom'
 import UserContext from './userContext';
 import JoblyAPI from './JoblyAPI';
 import "./JobCard.css"
+import jwt_decode from 'jwt-decode'
 
 function JobCard(props) {
   const { id, title, salary, equity, state, company_handle } = props.job;
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const [applied, setApplied] = useState(state)
 
-  console.log(props)
 
   async function applyToJob() {
     try {
       await JoblyAPI.apply(id, user.username);
       setApplied(true);
+      updateCurrentUser();
     } catch (err) {
       console.debug(err);
     }
@@ -23,10 +24,18 @@ function JobCard(props) {
     try {
       await JoblyAPI.withdraw(id, user.username);
       setApplied(false);
+      updateCurrentUser();
     } catch (err) {
       console.debug(err);
     }
   }
+  async function updateCurrentUser() {
+    let token = localStorage.getItem("_token");
+    let decoded = jwt_decode(token);
+    let currentUser = await JoblyAPI.getUser(decoded.username);
+    updateUser(currentUser);
+  }
+
 
   const appliedButton = <button
     className="btn btn-outline-danger btn-sm font-weight-bold text-uppercase float-right"

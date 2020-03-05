@@ -33,9 +33,9 @@ function Routes() {
 
   async function getCurrentUser() {
     let token = localStorage.getItem("_token");
-    let decoded = jwt_decode(token)
-    let currentUser = await JoblyAPI.getUser(decoded.username)
-    updateUser(currentUser)
+    let decoded = jwt_decode(token);
+    let currentUser = await JoblyAPI.getUser(decoded.username);
+    updateUser(currentUser);
   }
 
   async function login(currentUser) {

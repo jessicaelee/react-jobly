@@ -61,6 +61,7 @@ function Login({ login, create }) {
         <label htmlFor="username">Username</label>
         <br />
         <input id="username"
+          className="form-control"
           name="username"
           type="text"
           required
@@ -71,6 +72,7 @@ function Login({ login, create }) {
         <label htmlFor="password">Password</label>
         <br />
         <input id="password"
+          className="form-control"
           name="password"
           type="password"
           required
@@ -87,6 +89,7 @@ function Login({ login, create }) {
       <div className="Login form-group">
         <label htmlFor="username">Username</label>
         <input id="username"
+          className="form-control"
           name="username"
           type="text"
           required
@@ -96,6 +99,7 @@ function Login({ login, create }) {
       <div className="Login form-group">
         <label htmlFor="password">Password</label>
         <input id="password"
+          className="form-control"
           name="password"
           type="password"
           required
@@ -105,6 +109,7 @@ function Login({ login, create }) {
       <div className="Login form-group">
         <label htmlFor="firstName">First Name</label>
         <input id="firstName"
+          className="form-control"
           name="first_name"
           type="text"
           required
@@ -114,6 +119,7 @@ function Login({ login, create }) {
       <div className="Login form-group">
         <label htmlFor="lastName">Last Name</label>
         <input id="lastName"
+          className="form-control"
           name="last_name"
           type="text"
           required
@@ -123,6 +129,7 @@ function Login({ login, create }) {
       <div className="Login form-group">
         <label htmlFor="email">Email</label>
         <input id="email"
+          className="form-control"
           name="email"
           type="email"
           required
