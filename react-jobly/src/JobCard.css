@@ -1,0 +1,9 @@
+.Job.card {
+    margin: 8px 0px;
+    color: #494848;
+    max-height: 150px;
+}
+
+.Job-detail {
+    text-align: left;
+}

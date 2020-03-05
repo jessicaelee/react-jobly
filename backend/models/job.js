@@ -11,8 +11,8 @@ class Job {
   static async findAll(data, username) {
     console.log(data);
     let baseQuery = `
-      SELECT id, title, company_handle, salary, equity, a.state 
-      FROM jobs 
+      SELECT id, title, company_handle, salary, equity, a.state
+      FROM jobs
         LEFT OUTER JOIN applications AS a on a.job_id = id AND a.username = $1`;
     let whereExpressions = [];
     let queryValues = [username];
@@ -50,8 +50,8 @@ class Job {
 
   static async findOne(id) {
     const jobRes = await db.query(
-        `SELECT id, title, salary, equity, company_handle 
-             FROM jobs 
+        `SELECT id, title, salary, equity, company_handle
+             FROM jobs
              WHERE id = $1`,
         [id]);
 
@@ -64,8 +64,8 @@ class Job {
     }
 
     const companiesRes = await db.query(
-        `SELECT name, num_employees, description, logo_url 
-          FROM companies 
+        `SELECT name, num_employees, description, logo_url
+          FROM companies
           WHERE handle = $1`,
         [job.company_handle]
     );
@@ -79,8 +79,8 @@ class Job {
 
   static async create(data) {
     const result = await db.query(
-        `INSERT INTO jobs (title, salary, equity, company_handle) 
-             VALUES ($1, $2, $3, $4) 
+        `INSERT INTO jobs (title, salary, equity, company_handle)
+             VALUES ($1, $2, $3, $4)
              RETURNING id, title, salary, equity, company_handle`,
         [data.title, data.salary, data.equity, data.company_handle]
     );
@@ -121,8 +121,8 @@ class Job {
 
   static async remove(id) {
     const result = await db.query(
-        `DELETE FROM jobs 
-            WHERE id = $1 
+        `DELETE FROM jobs
+            WHERE id = $1
             RETURNING id`,
         [id]);
 
@@ -137,8 +137,8 @@ class Job {
 
   static async apply(id, username, state) {
       const result = await db.query(
-          `SELECT id 
-            FROM jobs 
+          `SELECT id
+            FROM jobs
             WHERE id = $1`,
           [id]);
 
@@ -149,9 +149,24 @@ class Job {
       }
 
       await db.query(
-          `INSERT INTO applications (job_id, username, state) 
+          `INSERT INTO applications (job_id, username, state)
             VALUES ($1, $2, $3)`,
           [id, username, state]);
+  }
+
+  static async withdraw(id, username) {
+    const result = await db.query(
+      `DELETE from applications
+        WHERE username = $1
+        AND job_id = $2
+      RETURNING username`,
+      [username, id]);
+
+    if (!result.rows.length) {
+      let notFound = new Error(`No matching application for this user.`);
+      notFound.status = 404;
+      throw notFound;
+    }
   }
 }
 

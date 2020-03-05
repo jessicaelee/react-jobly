@@ -63,6 +63,9 @@ class JoblyApi {
     await this.request(`jobs/${id}/apply`, { username }, "post");
   }
 
+  static async withdraw(id, username) {
+    await this.request(`jobs/${id}/withdraw`, { username }, "post");
+  }
 
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import Alert from './Alert'
 import UserContext from './userContext'
 import JoblyAPI from './JoblyAPI'
+import './ProfileEditForm.css'
 
 function ProfileEditForm() {
   const { user, updateUser } = useContext(UserContext);
@@ -44,10 +45,13 @@ function ProfileEditForm() {
 
   const updateForm = (
     <form className="Update-updateForm" onSubmit={handleSubmit}>
-      <label className="font-weight-bold" htmlFor="username">Username</label>
-      <p>{username}</p>
+      <div className="Update form-group">
+        <label className="font-weight-bold" htmlFor="username">Username</label>
+        <p>{username}</p>
+      </div>
 
-      <div className="form-group"><label className="font-weight-bold" htmlFor="first_name">First Name</label>
+      <div className="Update form-group">
+        <label className="Update font-weight-bold" htmlFor="first_name">First Name</label>
         <input className="form-control" id="first_name"
           name="first_name"
           type="text"
@@ -55,7 +59,8 @@ function ProfileEditForm() {
           onChange={handleChange}
           value={form.first_name} /> </div>
 
-      <div className="form-group"><label className="font-weight-bold" htmlFor="last_name">Last Name</label>
+      <div className="Update form-group">
+        <label className="Update font-weight-bold" htmlFor="last_name">Last Name</label>
         <input className="form-control" id="last_name"
           name="last_name"
           type="text"
@@ -63,7 +68,8 @@ function ProfileEditForm() {
           onChange={handleChange}
           value={form.last_name} /></div>
 
-      <div className="form-group"><label className="font-weight-bold" htmlFor="email">Email</label>
+      <div className="Update form-group">
+        <label className="Update font-weight-bold" htmlFor="email">Email</label>
         <input className="form-control" id="email"
           name="email"
           type="email"
@@ -71,14 +77,16 @@ function ProfileEditForm() {
           onChange={handleChange}
           value={form.email} /></div>
 
-      <div className="form-group"><label className="font-weight-bold" htmlFor="photo_url">Photo URL</label>
+      <div className="Update form-group">
+        <label className="Update font-weight-bold" htmlFor="photo_url">Photo URL</label>
         <input className="form-control" id="photo_url"
           name="photo_url"
           type="text"
           onChange={handleChange}
           value={form.photo_url} /></div>
 
-      <div className="form-group"><label className="font-weight-bold" htmlFor="password">Re-enter Password</label>
+      <div className="Update form-group">
+        <label className="Update font-weight-bold" htmlFor="password">Re-enter Password</label>
         <input className="form-control" id="password"
           name="password"
           type="password"

@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { NavLink, Link } from 'react-router-dom'
+import './Nav.css'
 
-function Nav({ loggedIn, logout }) {
+function Nav({ isloggedIn, logout }) {
 
 
     const loggedInLinks = (
@@ -10,7 +10,7 @@ function Nav({ loggedIn, logout }) {
             <li className="nav-item mr-4"><NavLink exact to="/companies">Companies</NavLink></li>
             <li className="nav-item mr-4"><NavLink exact to="/jobs">Jobs</NavLink></li>
             <li className="nav-item mr-4"><NavLink exact to="/profile">Profile</NavLink></li>
-            <li className="nav-item mr-4"><NavLink exact to="/" onClick={logout}>Logout</NavLink></li>
+            <li className="nav-item mr-4"><Link to="/" onClick={logout}>Logout</Link></li>
         </ul>
     )
 
@@ -22,10 +22,12 @@ function Nav({ loggedIn, logout }) {
 
 
     return (
+        <div>
         <nav className="Nav navbar navbar-expand-md">
-            <NavLink exact to="/" className="navbar-brand">Jobly</NavLink>
-            {(loggedIn) ? loggedInLinks : links}
+            <Link to="/" className="navbar-brand">Jobly</Link>
+            {(isloggedIn) ? loggedInLinks : links}
         </nav>
+        </div>
     )
 
 }

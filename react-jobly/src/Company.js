@@ -21,14 +21,18 @@ function Company() {
     ? company.jobs.map(job => <JobCard job={job} key={job.id} />)
     : "No jobs posted";
 
+
   return (
-    <div className="Company">
-      {company
-        ? <div><h5 className="text-capitalize">{company.name}</h5>
-          <p>{company.description}</p></div>
-        : "loading..."}
-      <div className="Company-jobs-list">
-        {jobs}
+    <div className="Company pt-5">
+      <div className="col-md-8 offset-md-2">
+
+        {company
+          ? <div><h5 className="text-capitalize">{company.name}</h5>
+            <p>{company.description}</p></div>
+          : "loading..."}
+        <div className="Company-jobs-list">
+          {jobs}
+        </div>
       </div>
     </div>
   )

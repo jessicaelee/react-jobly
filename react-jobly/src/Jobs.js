@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import JoblyAPI from './JoblyAPI';
 import JobCard from './JobCard';
 
-function Jobs(props) {
+function Jobs() {
   const [jobs, setJobs] = useState([]);
   const [form, setForm] = useState({ search: "" });
+  const message = useRef("Loading...")
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    message.current = "No jobs found."
     let filteredJobs = await getJobs(form.search)
     setJobs(filteredJobs);
   };
@@ -33,16 +35,15 @@ function Jobs(props) {
     }));
   };
 
-
   const JobCards = jobs.length > 0
     ? jobs.map(job => <JobCard job={job} key={job.id} />)
-    : "No jobs match your search";
+    : message.current;
 
   return (
     <div className="Jobs pt-5">
       <div className="col-md-8 offset-md-2">
         <form className="Jobs-search form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
-          <input className="form-control mr-sm-2"
+          <input className="form-control flex-grow-1 mr-sm-2"
             type="search"
             placeholder="Search"
             aria-label="search"

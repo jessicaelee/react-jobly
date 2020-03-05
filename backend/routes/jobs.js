@@ -114,6 +114,19 @@ router.post("/:id/apply", authRequired, async function(req, res, next) {
   }
 });
 
+/** POST /[id]/withdraw  {state} => {message: "Successfully withdrawn application"} */
+
+router.post("/:id/withdraw", authRequired, async function(req, res, next) {
+  try {
+    await Job.withdraw(req.params.id, req.username);
+    return res.json({ message: "Successfully withdrawn application." });
+  }
+
+  catch (err) {
+    return next(err);
+  }
+});
+
 
 
 module.exports = router;

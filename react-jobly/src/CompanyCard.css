@@ -1,0 +1,17 @@
+.Company.card {
+    margin: 8px 0px;
+    text-decoration: none;
+    color: #494848;
+}
+
+.Company.card:hover {
+    border: 2px solid slategray;
+}
+
+img.CCard {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    object-fit: cover;
+}
+

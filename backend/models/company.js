@@ -48,12 +48,12 @@ class Company {
 
   /** Given a company handle, return data about company. */
 
-  static async findOne(handle) {
+  static async findOne(username, handle) {
     const companyRes = await db.query(
-        `SELECT handle, name, num_employees, description, logo_url
+      `SELECT handle, name, num_employees, description, logo_url
             FROM companies
             WHERE handle = $1`,
-        [handle]);
+      [handle]);
 
     const company = companyRes.rows[0];
 
@@ -64,10 +64,11 @@ class Company {
     }
 
     const jobsRes = await db.query(
-        `SELECT id, title, salary, equity
-            FROM jobs 
-            WHERE company_handle = $1`,
-        [handle]);
+      `SELECT id, title, salary, equity, a.state
+            FROM jobs
+            LEFT OUTER JOIN applications AS a on a.job_id = id AND a.username = $1
+            WHERE company_handle = $2`,
+      [username, handle]);
 
     company.jobs = jobsRes.rows;
 
@@ -78,30 +79,30 @@ class Company {
 
   static async create(data) {
     const duplicateCheck = await db.query(
-        `SELECT handle 
-            FROM companies 
+      `SELECT handle
+            FROM companies
             WHERE handle = $1`,
-        [data.handle]);
+      [data.handle]);
 
     if (duplicateCheck.rows[0]) {
       let duplicateError = new Error(
-          `There already exists a company with handle '${data.handle}`);
+        `There already exists a company with handle '${data.handle}`);
       duplicateError.status = 409; // 409 Conflict
       throw duplicateError
     }
 
     const result = await db.query(
-        `INSERT INTO companies 
+      `INSERT INTO companies
               (handle, name, num_employees, description, logo_url)
-            VALUES ($1, $2, $3, $4, $5) 
+            VALUES ($1, $2, $3, $4, $5)
             RETURNING handle, name, num_employees, description, logo_url`,
-        [
-          data.handle,
-          data.name,
-          data.num_employees,
-          data.description,
-          data.logo_url
-        ]);
+      [
+        data.handle,
+        data.name,
+        data.num_employees,
+        data.description,
+        data.logo_url
+      ]);
 
     return result.rows[0];
   }
@@ -116,11 +117,11 @@ class Company {
    */
 
   static async update(handle, data) {
-    let {query, values} = sqlForPartialUpdate(
-        "companies",
-        data,
-        "handle",
-        handle
+    let { query, values } = sqlForPartialUpdate(
+      "companies",
+      data,
+      "handle",
+      handle
     );
 
     const result = await db.query(query, values);
@@ -139,10 +140,10 @@ class Company {
 
   static async remove(handle) {
     const result = await db.query(
-        `DELETE FROM companies 
-          WHERE handle = $1 
+      `DELETE FROM companies
+          WHERE handle = $1
           RETURNING handle`,
-        [handle]);
+      [handle]);
 
     if (result.rows.length === 0) {
       let notFound = new Error(`There exists no company '${handle}`);

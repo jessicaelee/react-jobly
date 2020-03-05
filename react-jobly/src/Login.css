@@ -1,0 +1,30 @@
+.Login-form {
+    max-width: 450px;
+    margin: auto;
+}
+
+.Login.btn-group {
+    float: right;
+}
+
+.Login.card {
+    clear: right;
+}
+
+.Login.form-group {
+    text-align: left;
+}
+
+.Login.form-group input {
+    margin: auto;
+    width: 378px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid grey;
+}
+
+.Login.form-group label {
+    display: inline-block;
+    text-align: left;
+
+}

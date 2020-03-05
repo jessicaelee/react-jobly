@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import JoblyAPI from './JoblyAPI';
 import CompanyCard from './CompanyCard'
 
@@ -6,10 +6,11 @@ import CompanyCard from './CompanyCard'
 function Companies() {
   const [companies, setCompanies] = useState([]);
   const [form, setForm] = useState({ search: "" });
-
+  const message = useRef("Loading...")
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    message.current = "No companies match your search."
     let filteredCompanies = await getCompanies(form.search)
     setCompanies(filteredCompanies);
   };
@@ -39,13 +40,13 @@ function Companies() {
 
   const CompanyCards = companies.length > 0
     ? companies.map(company => <CompanyCard company={company} key={company.handle} />)
-    : "No companies match your search."
+    : message.current;
 
   return (
     <div className="Companies pt-5">
       <div className="col-md-8 offset-md-2">
         <form className="Companies-search form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
-          <input className="form-control mr-sm-2"
+          <input className="form-control flex-grow-1 mr-sm-2"
             type="search"
             placeholder="Search"
             aria-label="search"
@@ -56,7 +57,8 @@ function Companies() {
         </form>
 
         <div className="Companies-List">
-          {CompanyCards}</div>
+          {CompanyCards}
+        </div>
       </div>
     </div>
   );

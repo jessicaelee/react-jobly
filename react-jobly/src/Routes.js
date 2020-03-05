@@ -10,21 +10,20 @@ import Home from './Home';
 import Nav from './Nav'
 import JoblyAPI from './JoblyAPI'
 import jwt_decode from 'jwt-decode'
-import JoblyApi from './JoblyAPI';
 import UserContext from './userContext';
 
 function Routes() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isloggedIn, setLoggedIn] = useState(false);
   const { updateUser } = useContext(UserContext);
 
   //don't need to check if token is valid, just if there is one
   //backend validates token
   useEffect(() => {
     checkToken();
-    if (loggedIn) {
+    if (isloggedIn) {
       getCurrentUser()
     }
-  }, [loggedIn])
+  }, [isloggedIn])
 
   function checkToken() {
     let token = localStorage.getItem("_token");
@@ -58,25 +57,25 @@ function Routes() {
 
   return (
     <BrowserRouter>
-      <Nav loggedIn={loggedIn} logout={logout} />
+      <Nav isloggedIn={isloggedIn} logout={logout} />
       <Switch >
         <Route exact path="/companies/:handle">
-          {loggedIn ? <Company /> : <Redirect to="/" />}
+          {isloggedIn ? <Company /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/companies">
-          {loggedIn ? <Companies /> : <Redirect to="/" />}
+          {isloggedIn ? <Companies /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/jobs">
-          {loggedIn ? <Jobs /> : <Redirect to="/" />}
+          {isloggedIn ? <Jobs /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/profile">
-          {loggedIn ? <ProfileEditForm /> : <Redirect to="/" />}
+          {isloggedIn ? <ProfileEditForm /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/login">
-          {!loggedIn ? <Login login={login} create={create} /> : <Redirect to="/" />}
+          {!isloggedIn ? <Login login={login} create={create} /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/">
-          <Home loggedIn={loggedIn} />
+          <Home isloggedIn={isloggedIn} />
         </Route>
         <Redirect to="/" />
       </Switch>
