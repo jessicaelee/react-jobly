@@ -1,7 +1,6 @@
 import React from "react";
 
 function Alert({ type, messages }) {
-  console.log(type, messages)
   return (
     <div className={`alert alert-${type}`} role="alert">
       {messages.map(error => (

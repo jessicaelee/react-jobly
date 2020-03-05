@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Alert from './Alert'
+import UserContext from './userContext'
+import JoblyAPI from './JoblyAPI'
 
-function ProfileEditForm({ user, updateUser }) {
+function ProfileEditForm() {
+  const { user, updateUser } = useContext(UserContext);
   const { username, first_name, last_name, email, photo_url } = user;
   const [alert, setAlert] = useState(null)
   const [form, setForm] = useState({
@@ -23,7 +26,7 @@ function ProfileEditForm({ user, updateUser }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await updateUser(form);
+      await patchUser(form);
       setAlert(<Alert type="success" messages={["User successfully updated."]} />);
       setForm(form => ({ ...form, password: "" }));
       setTimeout(() => setAlert(null), 4000);
@@ -32,6 +35,12 @@ function ProfileEditForm({ user, updateUser }) {
       setTimeout(() => setAlert(null), 4000);
     };
   };
+
+  async function patchUser(updatedUser) {
+    let userUpdate = await JoblyAPI.patchUser(updatedUser);
+    updateUser(userUpdate);
+  }
+
 
   const updateForm = (
     <form className="Update-updateForm" onSubmit={handleSubmit}>

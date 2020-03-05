@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import JoblyAPI from './JoblyAPI'
-import JobCard from './JobCard'
+import JoblyAPI from './JoblyAPI';
+import JobCard from './JobCard';
 
-function Jobs() {
+function Jobs(props) {
   const [jobs, setJobs] = useState([]);
   const [form, setForm] = useState({ search: "" });
 
@@ -32,6 +32,7 @@ function Jobs() {
       ...fData, [name]: value
     }));
   };
+
 
   const JobCards = jobs.length > 0
     ? jobs.map(job => <JobCard job={job} key={job.id} />)

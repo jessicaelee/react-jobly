@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react';
+import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 
 import Company from './Company';
 import Companies from './Companies';
@@ -11,10 +11,11 @@ import Nav from './Nav'
 import JoblyAPI from './JoblyAPI'
 import jwt_decode from 'jwt-decode'
 import JoblyApi from './JoblyAPI';
+import UserContext from './userContext';
 
 function Routes() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null)
+  const { updateUser } = useContext(UserContext);
 
   //don't need to check if token is valid, just if there is one
   //backend validates token
@@ -25,24 +26,6 @@ function Routes() {
     }
   }, [loggedIn])
 
-  async function login(user) {
-    let token = await JoblyAPI.loginUser(user)
-    localStorage.setItem("_token", token);
-    setLoggedIn(true);
-  }
-
-  function logout() {
-    localStorage.removeItem("_token");
-    setLoggedIn(false);
-    setCurrentUser(null);
-  }
-
-  async function create(user) {
-    let token = await JoblyAPI.createUser(user);
-    localStorage.setItem("_token", token);
-    setLoggedIn(true);
-  }
-
   function checkToken() {
     let token = localStorage.getItem("_token");
     setLoggedIn(token ? true : false);
@@ -51,15 +34,27 @@ function Routes() {
   async function getCurrentUser() {
     let token = localStorage.getItem("_token");
     let decoded = jwt_decode(token)
-    let user = await JoblyAPI.getUser(decoded.username)
-    setCurrentUser(user)
+    let currentUser = await JoblyAPI.getUser(decoded.username)
+    updateUser(currentUser)
   }
 
-  async function updateUser(user) {
-    let updatedUser = await JoblyApi.updateUser(user);
-    setCurrentUser(updatedUser);
+  async function login(currentUser) {
+    let token = await JoblyAPI.loginUser(currentUser)
+    localStorage.setItem("_token", token);
+    setLoggedIn(true);
   }
 
+  function logout() {
+    localStorage.removeItem("_token");
+    setLoggedIn(false);
+    updateUser(null);
+  }
+
+  async function create(currentUser) {
+    let token = await JoblyAPI.createUser(currentUser);
+    localStorage.setItem("_token", token);
+    setLoggedIn(true);
+  }
 
   return (
     <BrowserRouter>
@@ -75,7 +70,7 @@ function Routes() {
           {loggedIn ? <Jobs /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/profile">
-          {loggedIn ? <ProfileEditForm user={currentUser} updateUser={updateUser} /> : <Redirect to="/" />}
+          {loggedIn ? <ProfileEditForm /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/login">
           {!loggedIn ? <Login login={login} create={create} /> : <Redirect to="/" />}

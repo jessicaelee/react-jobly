@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import JoblyApi from './JoblyAPI';
+import JoblyAPI from './JoblyAPI';
 import JobCard from './JobCard';
 
 function Company() {
@@ -10,11 +10,12 @@ function Company() {
 
   useEffect(() => {
     async function getCompany(code) {
-      let companyRes = await JoblyApi.getCompany(code);
+      let companyRes = await JoblyAPI.getCompany(code);
       setCompany(companyRes);
     }
     getCompany(handle);
   }, [handle])
+
 
   const jobs = company
     ? company.jobs.map(job => <JobCard job={job} key={job.id} />)

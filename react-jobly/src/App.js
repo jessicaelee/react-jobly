@@ -1,12 +1,12 @@
 import React from 'react';
-import Routes from './Routes'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import UserProvider from './UserProvider'
 
 function App() {
   return (
     <div className="App">
-      <Routes />
+      <UserProvider />
     </div>
   );
 }
