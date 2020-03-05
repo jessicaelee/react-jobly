@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom'
 import UserContext from './userContext';
 import JoblyAPI from './JoblyAPI';
 import "./JobCard.css"
 
 function JobCard(props) {
-  const { id, title, salary, equity, state } = props.job;
+  const { id, title, salary, equity, state, company_handle } = props.job;
   const { user } = useContext(UserContext);
   const [applied, setApplied] = useState(state)
+
+  console.log(props)
 
   async function applyToJob() {
     try {
@@ -28,7 +31,7 @@ function JobCard(props) {
   const appliedButton = <button
     className="btn btn-outline-danger btn-sm font-weight-bold text-uppercase float-right"
     onClick={withdrawApplication}
-    >
+  >
     Withdraw App
     </button>
 
@@ -38,14 +41,20 @@ function JobCard(props) {
     Apply
     </button>
 
+  const links = <Link className="JobCard-company" to={`/companies/${company_handle}`}>@{company_handle}</Link>
+
   return (
 
     <div className="Job card">
       <div className="JobCard-Body card-body">
-        <h6 className="card-title d-flex justify-content-between">
-          <span className="text-capitalize"> {title}
-          </span>
-        </h6>
+        <div className="JobCard-heading">
+          <h5 className="card-title d-flex justify-content-between">
+            <span className="text-capitalize"> {title}
+            </span>
+            {(company_handle) ? links : ""}
+          </h5>
+
+        </div>
         <div className="Job-detail"> Salary: {salary.toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD',

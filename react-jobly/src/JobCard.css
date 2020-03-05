@@ -7,3 +7,11 @@
 .Job-detail {
     text-align: left;
 }
+
+.JobCard-heading, h6.card-title, h5.card-title {
+    display: inline;
+}
+
+.JobCard-company {
+    font-size: 17px;
+}

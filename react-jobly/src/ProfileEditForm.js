@@ -3,6 +3,7 @@ import Alert from './Alert'
 import UserContext from './userContext'
 import JoblyAPI from './JoblyAPI'
 import './ProfileEditForm.css'
+import JobCard from './JobCard'
 
 function ProfileEditForm() {
   const { user, updateUser } = useContext(UserContext);
@@ -99,7 +100,6 @@ function ProfileEditForm() {
     </form>
   )
 
-
   return (
     <div className="ProfileEditFrom pt-5">
       <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
@@ -111,6 +111,10 @@ function ProfileEditForm() {
         </div>
       </div>
     </div>
+
+
+
+
   )
 
 }

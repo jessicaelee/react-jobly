@@ -11,6 +11,7 @@ import Nav from './Nav'
 import JoblyAPI from './JoblyAPI'
 import jwt_decode from 'jwt-decode'
 import UserContext from './userContext';
+import MyApps from './MyApps'
 
 function Routes() {
   const [isloggedIn, setLoggedIn] = useState(false);
@@ -67,6 +68,9 @@ function Routes() {
         </Route>
         <Route exact path="/jobs">
           {isloggedIn ? <Jobs /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/apps">
+          {isloggedIn ? <MyApps /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/profile">
           {isloggedIn ? <ProfileEditForm /> : <Redirect to="/" />}
