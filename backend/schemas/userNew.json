@@ -10,7 +10,10 @@
       "default": "",
       "minLength": 1,
       "maxLength": 55,
-      "examples": ["hueter"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "examples": [
+        "hueter"
+      ]
     },
     "password": {
       "$id": "/properties/password",
@@ -19,7 +22,10 @@
       "default": "",
       "minLength": 5,
       "maxLength": 55,
-      "examples": ["foo123"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "examples": [
+        "foo123"
+      ]
     },
     "first_name": {
       "$id": "/properties/first_name",
@@ -28,7 +34,10 @@
       "default": "",
       "minLength": 1,
       "maxLength": 55,
-      "examples": ["Michael"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "examples": [
+        "Michael"
+      ]
     },
     "last_name": {
       "$id": "/properties/last_name",
@@ -37,7 +46,10 @@
       "default": "",
       "minLength": 1,
       "maxLength": 55,
-      "examples": ["Hueter"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "examples": [
+        "Hueter"
+      ]
     },
     "photo_url": {
       "$id": "/properties/photo",
@@ -56,8 +68,14 @@
       "maxLength": 60,
       "title": "The Email Schema ",
       "default": "",
-      "examples": ["michael@rithmschool.com"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-\\.\\@\\+]*$",
+      "examples": [
+        "michael@rithmschool.com"
+      ]
     }
   },
-  "required": ["username", "password"]
+  "required": [
+    "username",
+    "password"
+  ]
 }

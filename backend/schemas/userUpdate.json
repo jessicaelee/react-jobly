@@ -10,7 +10,10 @@
       "default": "",
       "minLength": 5,
       "maxLength": 55,
-      "examples": ["foo123"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "examples": [
+        "foo123"
+      ]
     },
     "first_name": {
       "$id": "/properties/first_name",
@@ -19,7 +22,13 @@
       "default": "",
       "minLength": 1,
       "maxLength": 55,
-      "examples": ["Michael"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "message": {
+        "pattern": "Name can only contain certian characters."
+      },
+      "examples": [
+        "Michael"
+      ]
     },
     "last_name": {
       "$id": "/properties/last_name",
@@ -28,13 +37,15 @@
       "default": "",
       "minLength": 1,
       "maxLength": 55,
-      "examples": ["Hueter"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-]*$",
+      "examples": [
+        "Hueter"
+      ]
     },
     "photo_url": {
       "$id": "/properties/photo_url",
       "type": "string",
       "title": "The Photo Schema ",
-      "format": "uri",
       "default": "",
       "examples": [
         "https://avatars0.githubusercontent.com/u/13444851?s=460&v=4"
@@ -45,7 +56,9 @@
       "type": "string",
       "title": "The Current_company Schema ",
       "default": "",
-      "examples": ["rithm"]
+      "examples": [
+        "rithm"
+      ]
     },
     "email": {
       "$id": "/properties/email",
@@ -54,7 +67,10 @@
       "maxLength": 60,
       "title": "The Email Schema ",
       "default": "",
-      "examples": ["michael@rithmschool.com"]
+      "pattern": "^[a-zA-Z 0-9\\_\\-\\@\\+\\.]*$",
+      "examples": [
+        "michael@rithmschool.com"
+      ]
     },
     "_token": {
       "$id": "/properties/token",

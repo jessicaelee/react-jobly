@@ -38,7 +38,7 @@ function JobCard(props) {
 
 
   const appliedButton = <button
-    className="btn btn-outline-danger btn-sm font-weight-bold text-uppercase float-right"
+    className="JobCard-button btn btn-outline-danger btn-sm font-weight-bold text-uppercase float-right"
     onClick={withdrawApplication}
   >
     Withdraw App
@@ -46,7 +46,7 @@ function JobCard(props) {
 
   const button = <button
     onClick={applyToJob}
-    className="btn btn-danger font-weight-bold text-uppercase float-right">
+    className="JobCard-button btn btn-danger btn-sm font-weight-bold text-uppercase float-right">
     Apply
     </button>
 

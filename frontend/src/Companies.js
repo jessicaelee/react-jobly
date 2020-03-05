@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import JoblyAPI from './JoblyAPI';
 import CompanyCard from './CompanyCard'
+import Paginator from 'react-hooks-paginator';
 
 
 function Companies() {
+  const pageLimit = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentCompanies, setCurrentCompanies] = useState([]);
+  const [offset, setOffset] = useState(0);
   const [companies, setCompanies] = useState([]);
   const [form, setForm] = useState({ search: "" });
   const message = useRef("Loading...")
@@ -18,12 +23,14 @@ function Companies() {
   useEffect(() => {
     async function getInitialCompanies() {
       let comps = await getCompanies();
-
       setCompanies(comps)
     }
     getInitialCompanies();
   }, []);
 
+  useEffect(() => {
+    setCurrentCompanies(companies.slice(offset, offset + pageLimit));
+  }, [offset, companies]);
 
   const getCompanies = async (search) => {
     let resp = await JoblyAPI.getCompanies(search);
@@ -39,7 +46,7 @@ function Companies() {
   };
 
   const CompanyCards = companies.length > 0
-    ? companies.map(company => <CompanyCard company={company} key={company.handle} />)
+    ? currentCompanies.map(company => <CompanyCard company={company} key={company.handle} />)
     : message.current;
 
   return (
@@ -53,14 +60,23 @@ function Companies() {
             onChange={handleChange}
             value={form.search}
             name="search" />
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+          <button className="btn btn-outline-primary my-2 my-sm-0" type="submit" >Search</button>
         </form>
 
         <div className="Companies-List">
           {CompanyCards}
         </div>
       </div>
+      <Paginator
+        totalRecords={companies.length}
+        pageLimit={pageLimit}
+        pageNeighbours={2}
+        setOffset={setOffset}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
+
   );
 
 };

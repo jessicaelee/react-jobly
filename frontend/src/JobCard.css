@@ -15,3 +15,9 @@
 .JobCard-company {
     font-size: 17px;
 }
+
+.JobCard-button {
+    position: absolute;
+    top: 66%;
+    right: 2%;
+}

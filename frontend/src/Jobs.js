@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import JoblyAPI from './JoblyAPI';
 import JobCard from './JobCard';
+import Paginator from 'react-hooks-paginator';
 
 function Jobs() {
+  const pageLimit = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentJobs, setCurrentJobs] = useState([]);
+  const [offset, setOffset] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [form, setForm] = useState({ search: "" });
   const message = useRef("Loading...")
@@ -22,6 +27,10 @@ function Jobs() {
     getInitialJobs();
   }, []);
 
+  useEffect(() => {
+    setCurrentJobs(jobs.slice(offset, offset + pageLimit));
+  }, [offset, jobs]);
+
 
   const getJobs = async (search) => {
     let resp = await JoblyAPI.getJobs(search);
@@ -36,7 +45,7 @@ function Jobs() {
   };
 
   const JobCards = jobs.length > 0
-    ? jobs.map(job => <JobCard job={job} key={job.id} />)
+    ? currentJobs.map(job => <JobCard job={job} key={job.id} />)
     : message.current;
 
   return (
@@ -55,6 +64,14 @@ function Jobs() {
         <div className="Jobs-List">
           {JobCards}</div>
       </div>
+      <Paginator
+        totalRecords={jobs.length}
+        pageLimit={pageLimit}
+        pageNeighbours={2}
+        setOffset={setOffset}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 
