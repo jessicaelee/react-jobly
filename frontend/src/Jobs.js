@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import JoblyAPI from './JoblyAPI';
 import JobCard from './JobCard';
 import Paginator from 'react-hooks-paginator';
+import './Jobs.css'
 
 function Jobs() {
   const pageLimit = 20;
@@ -63,18 +64,17 @@ function Jobs() {
         </form>
         <div className="Jobs-List">
           {JobCards}</div>
+        <Paginator
+          totalRecords={jobs.length}
+          pageLimit={pageLimit}
+          pageNeighbours={2}
+          setOffset={setOffset}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
-      <Paginator
-        totalRecords={jobs.length}
-        pageLimit={pageLimit}
-        pageNeighbours={2}
-        setOffset={setOffset}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
     </div>
   );
-
 };
 
 

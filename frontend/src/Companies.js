@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import JoblyAPI from './JoblyAPI';
 import CompanyCard from './CompanyCard'
 import Paginator from 'react-hooks-paginator';
+import './Companies.css'
 
 
 function Companies() {
