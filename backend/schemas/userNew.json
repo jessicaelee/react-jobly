@@ -55,7 +55,6 @@
       "$id": "/properties/photo",
       "type": "string",
       "title": "The Photo Schema ",
-      "format": "uri",
       "default": "",
       "examples": [
         "https://avatars0.githubusercontent.com/u/13444851?s=460&v=4"
