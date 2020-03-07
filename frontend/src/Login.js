@@ -141,7 +141,7 @@ function Login({ login, create }) {
   )
 
   return (
-    <div className="Login pt-5">
+    <div className="Login-container pt-5">
       <div className="Login-form col-md-6 col-lg-4 offset-md-3 offset-lg-4">
         <div className="Login btn-group btn-group-toggle" data-toggle="buttons">
           <label className={`Login btn btn-primary ${returning ? "active" : ""}`}>
