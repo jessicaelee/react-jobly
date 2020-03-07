@@ -17,7 +17,7 @@ function Nav({ isloggedIn, logout }) {
 
     const links = (
         <ul className="navbar-nav ml-auto">
-            <li className="nav-item mr-4"><NavLink exact to="/login">Login</NavLink></li>
+            <li className="nav-item mr-4"><Link exact to="/login">Login</Link></li>
         </ul>
     )
 
