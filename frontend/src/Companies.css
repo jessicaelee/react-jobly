@@ -1,4 +1,12 @@
-.Companies {
+.Companies-search {
     top: 50px;
     position: relative;
+}
+
+.Companies-list {
+    margin-bottom: 20px;
+}
+
+.Company-paginator {
+    margin-top: 70px;
 }

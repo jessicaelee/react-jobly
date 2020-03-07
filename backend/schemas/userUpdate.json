@@ -42,15 +42,6 @@
         "Hueter"
       ]
     },
-    "photo_url": {
-      "$id": "/properties/photo_url",
-      "type": "string",
-      "title": "The Photo Schema ",
-      "default": "",
-      "examples": [
-        "https://avatars0.githubusercontent.com/u/13444851?s=460&v=4"
-      ]
-    },
     "current_company": {
       "$id": "/properties/current_company",
       "type": "string",

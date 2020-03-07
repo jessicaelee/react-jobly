@@ -5,7 +5,7 @@ import Paginator from 'react-hooks-paginator';
 import './Jobs.css'
 
 function Jobs() {
-  const pageLimit = 20;
+  const pageLimit = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [currentJobs, setCurrentJobs] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -60,10 +60,11 @@ function Jobs() {
             onChange={handleChange}
             value={form.search}
             name="search" />
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+          <button className="btn btn-outline-primary my-2 my-sm-0" type="submit" >Search</button>
         </form>
         <div className="Jobs-List">
-          {JobCards}</div>
+          {JobCards}
+        </div>
         <Paginator
           totalRecords={jobs.length}
           pageLimit={pageLimit}

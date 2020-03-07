@@ -6,7 +6,7 @@ import './Companies.css'
 
 
 function Companies() {
-  const pageLimit = 20;
+  const pageLimit = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [currentCompanies, setCurrentCompanies] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -63,23 +63,22 @@ function Companies() {
             name="search" />
           <button className="btn btn-outline-primary my-2 my-sm-0" type="submit" >Search</button>
         </form>
-
         <div className="Companies-List">
           {CompanyCards}
         </div>
+        <div className="Company-paginator">
+          <Paginator
+            totalRecords={companies.length}
+            pageLimit={pageLimit}
+            pageNeighbours={2}
+            setOffset={setOffset}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       </div>
-      <Paginator
-        totalRecords={companies.length}
-        pageLimit={pageLimit}
-        pageNeighbours={2}
-        setOffset={setOffset}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
     </div>
-
   );
-
 };
 
 export default Companies;

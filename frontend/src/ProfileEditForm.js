@@ -6,14 +6,13 @@ import './ProfileEditForm.css'
 
 function ProfileEditForm() {
   const { user, updateUser } = useContext(UserContext);
-  const { username, first_name, last_name, email, photo_url } = user;
+  const { username, first_name, last_name, email } = user;
   const [alert, setAlert] = useState(null)
   const [form, setForm] = useState({
     username,
     first_name,
     last_name,
     email,
-    photo_url: photo_url || "",
     password: ""
   });
 
@@ -76,14 +75,6 @@ function ProfileEditForm() {
           required
           onChange={handleChange}
           value={form.email} /></div>
-
-      <div className="Update form-group">
-        <label className="Update font-weight-bold" htmlFor="photo_url">Photo URL</label>
-        <input className="form-control" id="photo_url"
-          name="photo_url"
-          type="text"
-          onChange={handleChange}
-          value={form.photo_url} /></div>
 
       <div className="Update form-group">
         <label className="Update font-weight-bold" htmlFor="password">Re-enter Password</label>
