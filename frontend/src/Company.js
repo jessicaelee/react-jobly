@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import JoblyAPI from './JoblyAPI';
 import JobCard from './JobCard';
+import './Company.css';
 
 function Company() {
   const [company, setCompany] = useState(null)
