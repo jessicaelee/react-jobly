@@ -4,6 +4,7 @@ import "./CompanyCard.css"
 
 function CompanyCard(company) {
   const { handle, name, logo_url, description } = company.company;
+  console.log(company)
 
   return (
 

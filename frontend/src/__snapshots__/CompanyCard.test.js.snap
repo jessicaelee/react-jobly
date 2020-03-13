@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot with logo 1`] = `
+<DocumentFragment>
+  <a
+    class="Company card"
+    href="/companies/test_handle"
+  >
+    <div
+      class="CompanyCard-Body card-body"
+    >
+      <h6
+        class="card-title d-flex justify-content-between"
+      >
+        <span
+          class="text-capitalize"
+        >
+           Test Company
+        </span>
+        <img
+          alt="test_handle"
+          class="CCard"
+          src="https://www.washingtonpost.com/resizer/uwlkeOwC_3JqSUXeH8ZP81cHx3I=/arc-anglerfish-washpost-prod-washpost/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg"
+        />
+      </h6>
+      <p>
+         This is a test company. 
+      </p>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot without logo 1`] = `
+<DocumentFragment>
+  <a
+    class="Company card"
+    href="/companies/test_handle"
+  >
+    <div
+      class="CompanyCard-Body card-body"
+    >
+      <h6
+        class="card-title d-flex justify-content-between"
+      >
+        <span
+          class="text-capitalize"
+        >
+           Test Company
+        </span>
+        <img
+          alt="test_handle"
+          class="CCard"
+        />
+      </h6>
+      <p>
+         Become a great dog. 
+      </p>
+    </div>
+  </a>
+</DocumentFragment>
+`;
