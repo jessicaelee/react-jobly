@@ -4,6 +4,8 @@
 
 This repo contains two apps, a create-react-app for the front-end and a Node API for the back-end. Both of these are deployed on Heroku. 
 
+https://jobly-app.herokuapp.com/
+
 ## Getting started on the server
 
 1. Fork and clone the repository
