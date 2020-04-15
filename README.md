@@ -19,7 +19,8 @@ https://jobly-app.herokuapp.com/
 8. `npm start` to start the server
 
 
-## Getting Started on the client\
+## Getting Started on the client
 
 1. `cd client`
 2. `npm install`
+3. `npm start` 
