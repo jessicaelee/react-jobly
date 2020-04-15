@@ -13,7 +13,7 @@ This repo contains two apps, a create-react-app for the front-end and a Node API
 4. `createdb jobly-test`
 5. `psql jobly < data.sql`
 6. `psql jobly-test < data.sql`
-7. `npm test` to run the tests
+7. `jest` to run the tests
 8. `npm start` to start the server
 
 
