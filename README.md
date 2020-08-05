@@ -17,9 +17,6 @@ https://jobly-app.herokuapp.com/
 6. `psql jobly-test < data.sql`
 7. `npm start`
 
-`jest` to run tests.
-
-
 ## Getting Started on the client
 
 1. `cd client`
