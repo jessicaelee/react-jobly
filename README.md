@@ -15,8 +15,9 @@ https://jobly-app.herokuapp.com/
 4. `createdb jobly-test`
 5. `psql jobly < data.sql`
 6. `psql jobly-test < data.sql`
-7. `jest` to run the tests
-8. `npm start` to start the server
+7. `npm start`
+
+`jest` to run tests.
 
 
 ## Getting Started on the client
